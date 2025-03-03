@@ -1,0 +1,166 @@
+{
+    "appName": {
+        "message": "Webhook Sender",
+        "description": "Name of the application"
+    },
+    "appDesc": {
+        "message": "A tool to manage and send webhooks",
+        "description": "Description of the application"
+    },
+    "myWebhooks": {
+        "message": "My Webhooks",
+        "description": "My Webhooks tab"
+    },
+    "createWebhook": {
+        "message": "Create Webhook",
+        "description": "Create Webhook tab"
+    },
+    "requestLogs": {
+        "message": "Request Logs",
+        "description": "Request Logs tab"
+    },
+    "noWebhooks": {
+        "message": "No webhooks yet. Click \"Create Webhook\" to add one.",
+        "description": "Message when no webhooks exist"
+    },
+    "name": {
+        "message": "Name",
+        "description": "Webhook name field"
+    },
+    "url": {
+        "message": "URL",
+        "description": "Webhook URL field"
+    },
+    "method": {
+        "message": "HTTP Method",
+        "description": "HTTP method field"
+    },
+    "contentType": {
+        "message": "Content Type",
+        "description": "Content type field"
+    },
+    "headers": {
+        "message": "Headers (JSON format)",
+        "description": "Headers field"
+    },
+    "headersExample": {
+        "message": "Use valid JSON format, e.g.: {\"key\": \"value\", \"key2\": \"value2\"}",
+        "description": "Headers example help"
+    },
+    "body": {
+        "message": "Request Body",
+        "description": "Request body field"
+    },
+    "bodyJsonHelp": {
+        "message": "When content type is JSON, ensure you use valid JSON format",
+        "description": "JSON body help"
+    },
+    "bodyExample": {
+        "message": "Example: {\"user\": {\"name\": \"John\", \"age\": 30}}",
+        "description": "Body example"
+    },
+    "dynamicFields": {
+        "message": "Dynamic Fields",
+        "description": "Dynamic fields title"
+    },
+    "dynamicFieldsHelp": {
+        "message": "The system will automatically detect placeholders in the format {{field_name}} in the URL, headers, or body, and prompt you to fill in specific values when sending.",
+        "description": "Dynamic fields help"
+    },
+    "dynamicFieldsExample": {
+        "message": "Example: {\"user_id\": \"{{user_id}}\"} or https://api.example.com/users/{{user_id}}",
+        "description": "Dynamic fields example"
+    },
+    "save": {
+        "message": "Save",
+        "description": "Save button"
+    },
+    "test": {
+        "message": "Test",
+        "description": "Test button"
+    },
+    "refresh": {
+        "message": "Refresh",
+        "description": "Refresh button"
+    },
+    "clearLogs": {
+        "message": "Clear Logs",
+        "description": "Clear logs button"
+    },
+    "noLogs": {
+        "message": "No request logs",
+        "description": "Message when no logs exist"
+    },
+    "loadingLogs": {
+        "message": "Loading logs...",
+        "description": "Loading logs message"
+    },
+    "fillParameters": {
+        "message": "Fill Parameter Values",
+        "description": "Parameter modal title"
+    },
+    "paramDescription": {
+        "message": "This webhook contains parameters that need values. Please provide values for the following parameters:",
+        "description": "Parameter modal description"
+    },
+    "send": {
+        "message": "Send",
+        "description": "Send button"
+    },
+    "cancel": {
+        "message": "Cancel",
+        "description": "Cancel button"
+    },
+    "edit": {
+        "message": "Edit",
+        "description": "Edit button"
+    },
+    "delete": {
+        "message": "Delete",
+        "description": "Delete button"
+    },
+    "confirmDelete": {
+        "message": "Are you sure you want to delete this webhook?",
+        "description": "Delete confirmation message"
+    },
+    "webhookDeleted": {
+        "message": "Webhook deleted",
+        "description": "Webhook deletion success message"
+    },
+    "confirmClearLogs": {
+        "message": "Are you sure you want to clear all request logs?",
+        "description": "Clear logs confirmation message"
+    },
+    "jsonError": {
+        "message": "JSON Format Error",
+        "description": "JSON error message"
+    },
+    "jsonErrorDetails": {
+        "message": "Please check your JSON syntax and ensure:<br>- All keys use double quotes \"<br>- No trailing commas<br>- Properly matched brackets<br>- Values use correct format",
+        "description": "JSON error details"
+    },
+    "savedSuccess": {
+        "message": "Saved successfully",
+        "description": "Save success message"
+    },
+    "sendSuccess": {
+        "message": "Sent successfully",
+        "description": "Send success message"
+    },
+    "sendFailed": {
+        "message": "Send failed",
+        "description": "Send failure message"
+    },
+    "logsCleared": {
+        "message": "Logs cleared",
+        "description": "Logs cleared message"
+    },
+    "required": {
+        "message": "is required",
+        "description": "Required field message"
+    },
+    "noBodyNeeded": {
+        "message": "Request body not needed",
+        "description": "Message indicating some HTTP methods don't need a request body"
+    }
+}

@@ -1,0 +1,166 @@
+{
+    "appName": {
+        "message": "Webhook 发送器",
+        "description": "应用名称"
+    },
+    "appDesc": {
+        "message": "管理和发送 webhook 的工具",
+        "description": "应用描述"
+    },
+    "myWebhooks": {
+        "message": "我的 Webhooks",
+        "description": "我的Webhooks标签"
+    },
+    "createWebhook": {
+        "message": "创建 Webhook",
+        "description": "创建Webhook标签"
+    },
+    "requestLogs": {
+        "message": "请求日志",
+        "description": "请求日志标签"
+    },
+    "noWebhooks": {
+        "message": "暂无webhook，请点击\"创建Webhook\"按钮添加",
+        "description": "没有webhook的提示"
+    },
+    "name": {
+        "message": "名称",
+        "description": "webhook名称字段"
+    },
+    "url": {
+        "message": "URL",
+        "description": "webhook URL字段"
+    },
+    "method": {
+        "message": "HTTP方法",
+        "description": "HTTP方法字段"
+    },
+    "contentType": {
+        "message": "内容类型",
+        "description": "内容类型字段"
+    },
+    "headers": {
+        "message": "请求头 (JSON格式)",
+        "description": "请求头字段"
+    },
+    "headersExample": {
+        "message": "请使用有效的JSON格式，例如: {\"key\": \"value\", \"key2\": \"value2\"}",
+        "description": "请求头示例说明"
+    },
+    "body": {
+        "message": "请求体",
+        "description": "请求体字段"
+    },
+    "bodyJsonHelp": {
+        "message": "当内容类型为JSON时，请确保使用有效的JSON格式",
+        "description": "JSON请求体帮助"
+    },
+    "bodyExample": {
+        "message": "例如: {\"user\": {\"name\": \"张三\", \"age\": 30}}",
+        "description": "请求体示例"
+    },
+    "dynamicFields": {
+        "message": "动态字段",
+        "description": "动态字段标题"
+    },
+    "dynamicFieldsHelp": {
+        "message": "系统会自动检测URL、请求头或请求体中的 {{字段名}} 格式的占位符，发送时会提示填写具体值。",
+        "description": "动态字段帮助说明"
+    },
+    "dynamicFieldsExample": {
+        "message": "例如：{\"user_id\": \"{{user_id}}\"} 或 https://api.example.com/users/{{user_id}}",
+        "description": "动态字段示例"
+    },
+    "save": {
+        "message": "保存",
+        "description": "保存按钮"
+    },
+    "test": {
+        "message": "测试",
+        "description": "测试按钮"
+    },
+    "refresh": {
+        "message": "刷新",
+        "description": "刷新按钮"
+    },
+    "clearLogs": {
+        "message": "清空日志",
+        "description": "清空日志按钮"
+    },
+    "noLogs": {
+        "message": "暂无请求日志",
+        "description": "没有日志的提示"
+    },
+    "loadingLogs": {
+        "message": "正在加载日志...",
+        "description": "加载日志的提示"
+    },
+    "fillParameters": {
+        "message": "填写参数值",
+        "description": "参数弹窗标题"
+    },
+    "paramDescription": {
+        "message": "此Webhook包含需要填写的参数，请为以下参数提供值：",
+        "description": "参数弹窗描述"
+    },
+    "send": {
+        "message": "发送",
+        "description": "发送按钮"
+    },
+    "cancel": {
+        "message": "取消",
+        "description": "取消按钮"
+    },
+    "edit": {
+        "message": "编辑",
+        "description": "编辑按钮"
+    },
+    "delete": {
+        "message": "删除",
+        "description": "删除按钮"
+    },
+    "confirmDelete": {
+        "message": "确定要删除此webhook吗？",
+        "description": "删除确认提示"
+    },
+    "webhookDeleted": {
+        "message": "Webhook已删除",
+        "description": "Webhook删除成功提示"
+    },
+    "confirmClearLogs": {
+        "message": "确定要清空所有请求日志吗？",
+        "description": "清空日志确认提示"
+    },
+    "jsonError": {
+        "message": "JSON格式错误",
+        "description": "JSON错误提示"
+    },
+    "jsonErrorDetails": {
+        "message": "请检查您的JSON语法，确保：<br>- 所有的键使用双引号 \"<br>- 不要有多余的逗号<br>- 括号配对正确<br>- 值使用正确的格式",
+        "description": "JSON错误详情"
+    },
+    "savedSuccess": {
+        "message": "保存成功",
+        "description": "保存成功提示"
+    },
+    "sendSuccess": {
+        "message": "发送成功",
+        "description": "发送成功提示"
+    },
+    "sendFailed": {
+        "message": "发送失败",
+        "description": "发送失败提示"
+    },
+    "logsCleared": {
+        "message": "日志已清空",
+        "description": "日志清空提示"
+    },
+    "required": {
+        "message": "必填",
+        "description": "必填字段消息"
+    },
+    "noBodyNeeded": {
+        "message": "请求不需要请求体",
+        "description": "某些HTTP方法不需要请求体的提示"
+    }
+}

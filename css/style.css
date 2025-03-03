@@ -1,0 +1,679 @@
+/* Global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    width: 400px;
+    height: 500px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* Ensure body acts as positioning context */
+}
+
+.container {
+    padding: 16px;
+    padding-top: 40px;
+    position: relative;
+    /* Ensure it acts as positioning context */
+    z-index: 0;
+    /* Lower the container's z-index */
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #1a73e8;
+    text-align: center;
+}
+
+/* Tab styles */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #5f6368;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    color: #1a73e8;
+}
+
+.tab-btn.active {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+}
+
+.tab-content {
+    position: relative;
+    z-index: 5;
+    /* Increase z-index value to ensure content above language-switcher */
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    background-color: #f1f3f4;
+    color: #5f6368;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #e8eaed;
+}
+
+.btn.primary {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: #1765cc;
+}
+
+/* Webhook list styles */
+.webhook-list {
+    margin-top: 8px;
+    position: relative;
+    /* Ensure proper positioning */
+    z-index: 5;
+    /* Increase z-index to ensure list appears above language-switcher */
+}
+
+.webhook-item {
+    padding: 12px;
+    border: 1px solid #e8eaed;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.3s;
+    position: relative;
+    /* Ensure elements are properly positioned */
+    z-index: 5;
+    /* Keep z-index consistent with parent container */
+    background-color: white;
+    /* Ensure it has background color */
+}
+
+.webhook-item:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.webhook-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.webhook-item-name {
+    font-weight: 600;
+    color: #202124;
+}
+
+.webhook-item-url {
+    font-size: 12px;
+    color: #5f6368;
+    margin-bottom: 8px;
+    word-break: break-all;
+}
+
+.webhook-item-method {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.method-get {
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.method-post {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+
+.method-put {
+    background-color: #fef7e0;
+    color: #ea8600;
+}
+
+.method-delete {
+    background-color: #fce8e6;
+    color: #c5221f;
+}
+
+.method-patch {
+    background-color: #e6e6ff;
+    color: #5c00e6;
+}
+
+.webhook-item-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5f6368;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.action-btn:hover {
+    color: #1a73e8;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 32px 0;
+    color: #5f6368;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s;
+    max-width: 90%;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.notification.success {
+    background-color: #e6f4ea;
+    color: #137333;
+    border-left: 4px solid #137333;
+}
+
+.notification.error {
+    background-color: #fce8e6;
+    color: #c5221f;
+    border-left: 4px solid #c5221f;
+}
+
+.notification.visible {
+    opacity: 1;
+}
+
+.notification.clickable {
+    cursor: pointer;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.notification.clickable:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.notification-message {
+    margin-bottom: 6px;
+}
+
+.notification-action {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1a73e8;
+    text-decoration: underline;
+}
+
+.notification-details {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dynamic fields styles */
+.dynamic-field {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.dynamic-field input {
+    flex: 1;
+    margin-right: 8px;
+}
+
+.dynamic-field .field-actions {
+    display: flex;
+}
+
+.btn.small {
+    padding: 4px 10px;
+    font-size: 12px;
+    height: auto;
+    margin-left: 4px;
+}
+
+.remove-field-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.remove-field-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Help text */
+.field-help {
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border-left: 3px solid #1a73e8;
+}
+
+.field-help p {
+    margin-bottom: 4px;
+}
+
+.field-help code {
+    background-color: #e9ecef;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+/* Modal window styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-description {
+    color: #5f6368;
+    font-size: 14px;
+    margin: 10px 0 16px;
+    line-height: 1.4;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #1a73e8;
+}
+
+#dynamic-form .form-group {
+    margin-bottom: 12px;
+}
+
+/* Log styles */
+.log-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.logs-list {
+    margin-top: 8px;
+    position: relative;
+    /* Ensure correct positioning */
+    z-index: 5;
+    /* Increase z-index to ensure list appears above language-switcher */
+}
+
+.log-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: white;
+    position: relative;
+    /* Ensure elements are properly positioned */
+    z-index: 5;
+    /* Keep z-index consistent with parent container */
+    background-color: white;
+    /* Ensure it has background color */
+}
+
+.log-item:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.log-item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    width: auto;
+    margin-right: 8px;
+}
+
+.log-item-time {
+    color: #5f6368;
+    font-size: 12px;
+}
+
+.log-item-url {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.log-item-method {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.log-item-status {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 70px;
+    text-align: center;
+    margin-left: 8px;
+    margin-right: auto;
+}
+
+.status-success {
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.status-error {
+    background-color: #fce8e6;
+    color: #c5221f;
+}
+
+.log-item-details {
+    margin-top: 8px;
+    display: none;
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.log-section {
+    margin-bottom: 16px;
+}
+
+.log-section h4 {
+    margin: 10px 0;
+    color: #1a73e8;
+    font-size: 14px;
+}
+
+.log-item-section {
+    margin-bottom: 10px;
+    padding-left: 8px;
+}
+
+.log-item-section strong {
+    font-weight: 600;
+    color: #5f6368;
+}
+
+.log-item-code {
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    font-size: 12px;
+    margin-top: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #e8eaed;
+}
+
+.log-item-response {
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    font-size: 12px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.log-item-expand {
+    background: none;
+    border: none;
+    color: #1a73e8;
+    cursor: pointer;
+    padding: 0;
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.log-item-expand:hover {
+    text-decoration: underline;
+}
+
+/* 添加新的样式 */
+.log-item-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+/* 为第二行添加额外样式 */
+.log-item-row:nth-child(2) {
+    margin-top: 5px;
+    /* Add extra styles for second row */
+}
+
+.language-switcher {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 1;
+    /* Adjust z-index to ensure it's below content area */
+}
+
+.language-option {
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 13px;
+}
+
+.language-option:hover {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+
+.language-option.active {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+/* Modal action area styles */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* Danger button styles */
+.btn-danger {
+    background-color: #ea4335;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d33426;
+}
+
+/* Secondary button styles */
+.btn-secondary {
+    background-color: #f1f3f4;
+    color: #202124;
+    border: 1px solid #dadce0;
+}
+
+.btn-secondary:hover {
+    background-color: #e8eaed;
+}
+
+/* Disabled form group styles */
+.disabled-form-group {
+    opacity: 0.5;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.disabled-form-group::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(240, 240, 240, 0.3);
+    pointer-events: none;
+}
+
+.disabled-form-group textarea,
+.disabled-form-group input {
+    background-color: #f1f3f4;
+    cursor: not-allowed;
+    border-color: #dadce0;
+}
+
+.disabled-form-group .field-help {
+    display: none;
+}
