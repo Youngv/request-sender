@@ -40,6 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialization operations
     console.log('DOM fully loaded');
 
+    // First ensure correct language is loaded
+    chrome.storage.local.get('language', (result) => {
+        const userLanguage = result.language;
+        if (userLanguage) {
+            console.log('Using saved user language preference:', userLanguage);
+        }
+    });
+
+    // Listen for language change events
+    document.addEventListener('languageChanged', (event) => {
+        console.log('Language changed event received:', event.detail);
+
+        // 延迟执行以确保DOM已更新
+        setTimeout(() => {
+            // 重新应用UI状态
+            if (typeof toggleBodyVisibility === 'function') {
+                console.log('从languageChanged事件中调用toggleBodyVisibility');
+                toggleBodyVisibility();
+            }
+        }, 300);
+    });
+
     // Ensure all necessary DOM elements are loaded
     if (!methodSelect || !bodyFormGroup) {
         console.error('Method select or body form group not found during DOM load');
@@ -169,6 +191,14 @@ function loadWebhooks() {
             const webhookElement = createWebhookElement(webhook);
             webhookList.appendChild(webhookElement);
         });
+
+        // Update all internationalized elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const messageId = el.getAttribute('data-i18n');
+            if (messageId) {
+                el.textContent = i18n.getMessage(messageId);
+            }
+        });
     });
 }
 
@@ -181,40 +211,45 @@ function createWebhookElement(webhook) {
     webhookItem.className = 'webhook-item';
     webhookItem.dataset.id = webhook.id;
 
-    const webhookHeader = document.createElement('div');
-    webhookHeader.className = 'webhook-item-header';
+    // First row: Name
+    const nameElement = document.createElement('h3');
+    nameElement.className = 'webhook-item-name';
+    nameElement.textContent = webhook.name;
+    webhookItem.appendChild(nameElement);
+
+    // Second row: Method + URL
+    const methodUrlRow = document.createElement('div');
+    methodUrlRow.className = 'webhook-item-method-url';
 
     // Display HTTP method
     const methodElement = document.createElement('span');
     methodElement.className = `webhook-item-method method-${webhook.method.toLowerCase()}`;
     methodElement.textContent = webhook.method;
 
-    // Name and URL
-    const nameElement = document.createElement('h3');
-    nameElement.className = 'webhook-item-name';
-    nameElement.textContent = webhook.name;
-
-    const urlElement = document.createElement('div');
+    // URL
+    const urlElement = document.createElement('span');
     urlElement.className = 'webhook-item-url';
     urlElement.textContent = webhook.url;
 
-    webhookHeader.appendChild(methodElement);
-    webhookHeader.appendChild(nameElement);
-    webhookHeader.appendChild(urlElement);
+    methodUrlRow.appendChild(methodElement);
+    methodUrlRow.appendChild(urlElement);
+    webhookItem.appendChild(methodUrlRow);
 
-    // Actions button
+    // Third row: Actions buttons
     const actionsElement = document.createElement('div');
     actionsElement.className = 'webhook-item-actions';
 
     // Edit button
     const editButton = document.createElement('button');
     editButton.className = 'action-btn';
+    editButton.setAttribute('data-i18n', 'edit');
     editButton.textContent = i18n.getMessage('edit');
     editButton.addEventListener('click', () => editWebhook(webhook));
 
     // Delete button
     const deleteButton = document.createElement('button');
     deleteButton.className = 'action-btn';
+    deleteButton.setAttribute('data-i18n', 'delete');
     deleteButton.textContent = i18n.getMessage('delete');
     deleteButton.addEventListener('click', () => {
         deleteWebhook(webhook.id);
@@ -223,6 +258,7 @@ function createWebhookElement(webhook) {
     // Send button
     const sendButton = document.createElement('button');
     sendButton.className = 'action-btn';
+    sendButton.setAttribute('data-i18n', 'send');
     sendButton.textContent = i18n.getMessage('send');
     sendButton.addEventListener('click', () => sendWebhook(webhook));
 
@@ -230,7 +266,6 @@ function createWebhookElement(webhook) {
     actionsElement.appendChild(deleteButton);
     actionsElement.appendChild(sendButton);
 
-    webhookItem.appendChild(webhookHeader);
     webhookItem.appendChild(actionsElement);
 
     return webhookItem;
@@ -751,7 +786,7 @@ function openSendModal(webhook) {
         const input = document.createElement('input');
         input.type = 'text';
         input.name = placeholder;
-        input.placeholder = `输入${placeholder}值`;
+        input.placeholder = i18n.getMessage('enterValue').replace('{0}', placeholder);
 
         fieldGroup.appendChild(label);
         fieldGroup.appendChild(input);
@@ -878,7 +913,7 @@ function createLogElement(log) {
     url.textContent = log.url || (log.webhook && log.webhook.url) || '';
 
     // Handle Method: may be directly on log or on log.webhook
-    const methodValue = log.method || (log.webhook && log.webhook.method) || 'UNKNOWN';
+    const methodValue = log.method || (log.webhook && log.webhook.method) || i18n.getMessage('unknownMethod');
     const method = document.createElement('span');
     method.className = `log-item-method method-${methodValue.toLowerCase()}`;
     method.textContent = methodValue;
@@ -925,13 +960,13 @@ function createLogElement(log) {
     // Request URL
     const requestUrlDiv = document.createElement('div');
     requestUrlDiv.className = 'log-item-section';
-    requestUrlDiv.innerHTML = `<strong>URL:</strong> <span>${log.url || (log.webhook && log.webhook.url) || ''}</span>`;
+    requestUrlDiv.innerHTML = `<strong>${i18n.getMessage('url')}:</strong> <span>${log.url || (log.webhook && log.webhook.url) || ''}</span>`;
     requestSection.appendChild(requestUrlDiv);
 
     // Request method
     const requestMethodDiv = document.createElement('div');
     requestMethodDiv.className = 'log-item-section';
-    requestMethodDiv.innerHTML = `<strong>方法:</strong> <span>${log.method || (log.webhook && log.webhook.method) || 'UNKNOWN'}</span>`;
+    requestMethodDiv.innerHTML = `<strong>${i18n.getMessage('method')}:</strong> <span>${log.method || (log.webhook && log.webhook.method) || i18n.getMessage('unknownMethod')}</span>`;
     requestSection.appendChild(requestMethodDiv);
 
     // Request header information
@@ -1016,7 +1051,7 @@ function createLogElement(log) {
     // Response status
     const responseStatusDiv = document.createElement('div');
     responseStatusDiv.className = 'log-item-section';
-    responseStatusDiv.innerHTML = `<strong>状态:</strong> <span>${statusText}</span>`;
+    responseStatusDiv.innerHTML = `<strong>${i18n.getMessage('status')}:</strong> <span>${statusText}</span>`;
     responseSection.appendChild(responseStatusDiv);
 
     // Response header
@@ -1162,7 +1197,7 @@ function addLog(logData) {
             id: Date.now().toString(),
             timestamp: Date.now(),
             url: logData.url || (logData.webhook && logData.webhook.url) || '',
-            method: logData.method || (logData.webhook && logData.webhook.method) || 'UNKNOWN',
+            method: logData.method || (logData.webhook && logData.webhook.method) || i18n.getMessage('unknownMethod'),
             requestHeaders: logData.requestHeaders || (logData.webhook && logData.webhook.headers) || {},
             requestBody: logData.requestBody || (logData.webhook && logData.webhook.body) || '',
             success: logData.success === true, // Ensure boolean
@@ -1279,50 +1314,74 @@ function closeClearLogsModal() {
 }
 
 /**
- * Toggle request body form group visibility based on HTTP method
+ * 根据HTTP方法决定是否显示请求体输入框
+ * Toggle request body visibility based on HTTP method
  */
 function toggleBodyVisibility() {
     console.log('toggleBodyVisibility called');
 
-    // Directly get elements from DOM, avoid using possibly uninitialized variables
-    const methodElement = document.getElementById('webhook-method');
-    const bodyElement = document.getElementById('webhook-body');
-    const bodyFormGroup = bodyElement ? bodyElement.closest('.form-group') : null;
+    try {
+        // Directly get elements from DOM, avoid using possibly uninitialized variables
+        const methodElement = document.getElementById('webhook-method');
+        const bodyElement = document.getElementById('webhook-body');
+        const bodyFormGroup = bodyElement ? bodyElement.closest('.form-group') : null;
 
-    if (!methodElement || !bodyElement || !bodyFormGroup) {
-        console.error('Required elements not found');
-        return;
-    }
-
-    const method = methodElement.value;
-    console.log('Current method:', method);
-
-    const isMethodWithoutBody = method === 'GET' || method === 'HEAD';
-    console.log('Is method without body:', isMethodWithoutBody);
-
-    if (isMethodWithoutBody) {
-        console.log('Disabling body form group');
-        bodyFormGroup.classList.add('disabled-form-group');
-        bodyElement.disabled = true;
-        bodyElement.placeholder = `${method} ${i18n.getMessage('noBodyNeeded')}`;
-
-        // 隐藏帮助文本
-        const fieldHelp = bodyFormGroup.querySelector('.field-help');
-        if (fieldHelp) {
-            fieldHelp.style.display = 'none';
-            console.log('Field help hidden');
+        if (!methodElement) {
+            console.error('Method element not found');
+            return;
         }
-    } else {
-        console.log('Enabling body form group');
-        bodyFormGroup.classList.remove('disabled-form-group');
-        bodyElement.disabled = false;
-        bodyElement.placeholder = '{"key": "value"}';
 
-        // 显示帮助文本
-        const fieldHelp = bodyFormGroup.querySelector('.field-help');
-        if (fieldHelp) {
-            fieldHelp.style.display = '';
-            console.log('Field help shown');
+        if (!bodyElement) {
+            console.error('Body element not found');
+            return;
         }
+
+        if (!bodyFormGroup) {
+            console.error('Body form group not found');
+            return;
+        }
+
+        const method = methodElement.value;
+        console.log('Current method:', method);
+
+        const isMethodWithoutBody = method === 'GET' || method === 'HEAD';
+        console.log('Is method without body:', isMethodWithoutBody);
+
+        if (isMethodWithoutBody) {
+            console.log('Disabling body form group');
+            bodyFormGroup.classList.add('disabled-form-group');
+            bodyElement.disabled = true;
+
+            // 获取翻译，如果i18n可用
+            let placeholderText = `${method} requests don't need a body`;
+            if (window.i18n && typeof window.i18n.getMessage === 'function') {
+                const i18nMessage = window.i18n.getMessage('noBodyNeeded');
+                if (i18nMessage) {
+                    placeholderText = `${method} ${i18nMessage}`;
+                }
+            }
+            bodyElement.placeholder = placeholderText;
+
+            // 隐藏帮助文本
+            const fieldHelp = bodyFormGroup.querySelector('.field-help');
+            if (fieldHelp) {
+                fieldHelp.style.display = 'none';
+                console.log('Field help hidden');
+            }
+        } else {
+            console.log('Enabling body form group');
+            bodyFormGroup.classList.remove('disabled-form-group');
+            bodyElement.disabled = false;
+            bodyElement.placeholder = '{"key": "value"}';
+
+            // 显示帮助文本
+            const fieldHelp = bodyFormGroup.querySelector('.field-help');
+            if (fieldHelp) {
+                fieldHelp.style.display = '';
+                console.log('Field help shown');
+            }
+        }
+    } catch (error) {
+        console.error('Error in toggleBodyVisibility:', error);
     }
 } 

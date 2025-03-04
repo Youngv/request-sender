@@ -162,5 +162,41 @@
     "noBodyNeeded": {
         "message": "Request body not needed",
         "description": "Message indicating some HTTP methods don't need a request body"
+    },
+    "viewDetails": {
+        "message": "View Details",
+        "description": "Button to view log details"
+    },
+    "hideDetails": {
+        "message": "Hide Details",
+        "description": "Button to hide log details"
+    },
+    "status": {
+        "message": "Status",
+        "description": "Status label for response"
+    },
+    "success": {
+        "message": "Success",
+        "description": "Success status message"
+    },
+    "failure": {
+        "message": "Failure",
+        "description": "Failure status message"
+    },
+    "unknownError": {
+        "message": "Unknown Error",
+        "description": "Unknown error message"
+    },
+    "enterValue": {
+        "message": "Enter value for {0}",
+        "description": "Placeholder for parameter input"
+    },
+    "unknownMethod": {
+        "message": "UNKNOWN",
+        "description": "Label for unknown HTTP method"
+    },
+    "noDynamicFields": {
+        "message": "No dynamic fields found in this webhook.",
+        "description": "Message shown when no dynamic fields are found"
     }
 }

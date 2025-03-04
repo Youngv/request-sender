@@ -10,12 +10,16 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
         console.log('Webhook Sender installed.');
 
-        // Initialize storage with an empty webhooks array and default language
-        chrome.storage.local.set({
-            webhooks: [],
-            language: chrome.i18n.getUILanguage() || 'en'
-        }, () => {
-            console.log('Storage initialized.');
+        // Check if there's already a saved language preference
+        chrome.storage.local.get('language', (result) => {
+            // Initialize storage with an empty webhooks array and default language
+            chrome.storage.local.set({
+                webhooks: [],
+                // Use saved language if exists, otherwise use browser UI language or default to 'en'
+                language: result.language || chrome.i18n.getUILanguage() || 'en'
+            }, () => {
+                console.log('Storage initialized.');
+            });
         });
     } else if (details.reason === 'update') {
         console.log(`Webhook Sender updated from ${details.previousVersion} to ${chrome.runtime.getManifest().version}.`);
