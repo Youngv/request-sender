@@ -2,57 +2,56 @@
 <html lang="en">
 
 <head>
-    <title>Webhook Sender</title>
+    <title>Request Sender</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Added new meta tags for better performance -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Chrome extension to create, manage and send requests easily">
 </head>
 
 <body>
-    <div class="language-switcher">
-        <span>Language:</span>
-        <div class="language-option" data-lang="zh_CN">中文</div>
-        <div class="language-option" data-lang="en">English</div>
-    </div>
-
     <div class="container">
-        <h1 data-i18n="appName">Webhook Sender</h1>
+        <div class="header">
+            <h1 data-i18n="appName">Request Sender</h1>
+        </div>
 
         <div class="tabs">
-            <button class="tab-btn active" id="webhooks-tab" data-i18n="myWebhooks">My Webhooks</button>
-            <button class="tab-btn" id="create-tab" data-i18n="createWebhook">Create Webhook</button>
+            <button class="tab-btn active" id="requests-tab" data-i18n="myRequests">My Requests</button>
+            <button class="tab-btn" id="create-tab" data-i18n="createRequest">Create Request</button>
             <button class="tab-btn" id="logs-tab" data-i18n="requestLogs">Request Logs</button>
         </div>
 
         <div class="tab-content">
-            <!-- My Webhooks Tab -->
-            <div class="tab-pane active" id="webhooks-content">
-                <div class="webhook-list" id="webhook-list">
-                    <!-- Webhooks will be added dynamically via JS -->
-                    <div class="empty-state" id="empty-webhooks" data-i18n="noWebhooks">
-                        No webhooks yet, please click "Create Webhook" button to add
+            <!-- Requests Tab -->
+            <div class="tab-pane active" id="requests-content">
+                <div class="requests-list" id="requests-list">
+                    <!-- Requests will be added dynamically via JS -->
+                    <div class="empty-state" id="empty-requests" data-i18n="noRequests">
+                        No requests yet, please click "Create Request" button to add
                     </div>
                 </div>
             </div>
 
-            <!-- Create Webhook Tab -->
+            <!-- Create Request Tab -->
             <div class="tab-pane" id="create-content">
-                <h2 id="form-title" data-i18n="createWebhook">Create Webhook</h2>
-                <form id="webhook-form">
+                <h2 id="form-title" data-i18n="createRequest">Create Request</h2>
+                <form id="request-form">
                     <div class="form-group">
-                        <label for="webhook-name" data-i18n="name">Name</label>
-                        <input type="text" id="webhook-name" data-i18n-placeholder="name"
-                            placeholder="Enter webhook name" required>
+                        <label for="request-name" data-i18n="name">Name</label>
+                        <input type="text" id="request-name" data-i18n-placeholder="name"
+                            placeholder="Enter request name" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="webhook-url" data-i18n="url">URL</label>
-                        <input type="url" id="webhook-url" placeholder="https://example.com/webhook" required>
+                        <label for="request-url" data-i18n="url">URL</label>
+                        <input type="url" id="request-url" placeholder="https://example.com/request" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="webhook-method" data-i18n="method">HTTP Method</label>
-                        <select id="webhook-method">
+                        <label for="request-method" data-i18n="method">HTTP Method</label>
+                        <select id="request-method">
                             <option value="GET">GET</option>
                             <option value="POST" selected>POST</option>
                             <option value="PUT">PUT</option>
@@ -62,17 +61,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="webhook-content-type" data-i18n="contentType">Content Type</label>
-                        <select id="webhook-content-type">
+                        <label for="request-content-type" data-i18n="contentType">Content Type</label>
+                        <select id="request-content-type">
                             <option value="application/json" selected>JSON</option>
                             <option value="application/x-www-form-urlencoded">Form URL Encoded</option>
                             <option value="text/plain">Text</option>
                         </select>
+                        <div class="field-help content-type-help">
+                            <p id="auto-header-info" class="auto-header-notice"></p>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="webhook-headers" data-i18n="headers">Headers (JSON format)</label>
-                        <textarea id="webhook-headers" placeholder='{"Authorization": "Bearer token"}'></textarea>
+                        <label for="request-headers" data-i18n="headers">Headers (JSON format)</label>
+                        <textarea id="request-headers" placeholder='{"Authorization": "Bearer token"}'></textarea>
                         <div class="field-help">
                             <p data-i18n="headersExample">Please use valid JSON format, e.g.: {"key": "value", "key2":
                                 "value2"}</p>
@@ -80,8 +82,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="webhook-body" data-i18n="body">Request Body</label>
-                        <textarea id="webhook-body" placeholder='{"key": "value"}'></textarea>
+                        <label for="request-body" data-i18n="body">Request Body</label>
+                        <textarea id="request-body" placeholder='{"key": "value"}'></textarea>
                         <div class="field-help">
                             <p data-i18n="bodyJsonHelp">When content type is JSON, please ensure using valid JSON format
                             </p>
@@ -92,19 +94,23 @@
                     <!-- Dynamic Fields Section -->
                     <div class="form-group">
                         <label data-i18n="dynamicFields">Dynamic Fields</label>
-                        <div class="field-help dynamic-fields-info">
-                            <p data-i18n="dynamicFieldsHelp">The system will automatically detect placeholders in the
-                                format {{fieldName}} in URL, headers or body, and prompt you to fill in values when
-                                sending.</p>
-                            <p data-i18n="dynamicFieldsExample">Example: {"user_id": "{{user_id}}"} or
-                                https://api.example.com/users/{{user_id}}
+                        <div class="dynamic-fields-info">
+                            <p>
+                                <span class="highlight" data-i18n="dynamicFieldsTitle">The system automatically detects placeholders in the following format:</span>
+                                <code>{{fieldName}}</code>
                             </p>
+                            <p data-i18n="dynamicFieldsDesc">
+                                These placeholders can appear in URL, headers, or request body. You will be prompted to fill in specific values when sending.
+                            </p>
+                            <p data-i18n="dynamicFieldsExampleTitle">Examples:</p>
+                            <code class="example">{"user_id": "{{user_id}}"}</code>
+                            <code class="example">https://api.example.com/users/{{user_id}}</code>
                         </div>
                     </div>
 
                     <div class="form-actions">
                         <button type="submit" class="btn primary" data-i18n="save">Save</button>
-                        <button type="button" class="btn" id="test-webhook" data-i18n="test">Test</button>
+                        <button type="button" class="btn" id="test-request" data-i18n="test">Test</button>
                     </div>
                 </form>
             </div>
@@ -112,7 +118,6 @@
             <!-- Request Logs Tab -->
             <div class="tab-pane" id="logs-content">
                 <div class="log-actions">
-                    <button type="button" class="btn small" id="refresh-logs" data-i18n="refresh">Refresh</button>
                     <button type="button" class="btn small" id="clear-logs" data-i18n="clearLogs">Clear Logs</button>
                 </div>
                 <div class="logs-list" id="logs-list">
@@ -124,12 +129,12 @@
         </div>
     </div>
 
-    <!-- Send Webhook Modal -->
+    <!-- Send Request Modal -->
     <div class="modal" id="send-modal">
         <div class="modal-content">
             <span class="close-btn" id="close-modal">&times;</span>
             <h2 data-i18n="fillParameters">Fill Parameter Values</h2>
-            <p class="modal-description" data-i18n="paramDescription">This webhook contains parameters that need to be
+            <p class="modal-description" data-i18n="paramDescription">This request contains parameters that need to be
                 filled. Please provide values for the following parameters:</p>
             <form id="dynamic-form">
                 <!-- Dynamic fields will be displayed here -->
@@ -144,7 +149,7 @@
     <div class="modal" id="delete-modal">
         <div class="modal-content">
             <span class="close-btn" id="close-delete-modal">&times;</span>
-            <h3 data-i18n="confirmDelete">Are you sure you want to delete this webhook?</h3>
+            <h3 data-i18n="confirmDelete">Are you sure you want to delete this request?</h3>
             <div class="modal-actions">
                 <button type="button" class="btn btn-secondary" id="cancel-delete-btn"
                     data-i18n="cancel">Cancel</button>
@@ -166,9 +171,18 @@
         </div>
     </div>
 
-    <script src="js/i18n.js"></script>
-    <script src="js/languageSwitcher.js"></script>
-    <script src="js/popup.js"></script>
+    <!-- Modular script loading -->
+    <!-- I18n modules first -->
+    <script src="js/modules/i18n.js"></script>
+    
+    <!-- Core UI modules -->
+    <script src="js/modules/ui.js"></script>
+    <script src="js/modules/requestForm.js"></script>
+    <script src="js/modules/request.js"></script>
+    <script src="js/modules/logs.js"></script>
+    
+    <!-- Main application entry point -->
+    <script src="js/main.js"></script>
 </body>
 
 </html>

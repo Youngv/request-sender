@@ -1,38 +1,38 @@
 {
     "appName": {
-        "message": "Webhook 发送器",
+        "message": "请求发送器",
         "description": "应用名称"
     },
     "appDesc": {
-        "message": "管理和发送 webhook 的工具",
+        "message": "一个管理和发送HTTP请求的工具",
         "description": "应用描述"
     },
-    "myWebhooks": {
-        "message": "我的 Webhooks",
-        "description": "我的Webhooks标签"
+    "myRequests": {
+        "message": "我的请求",
+        "description": "我的请求标签"
     },
-    "createWebhook": {
-        "message": "创建 Webhook",
-        "description": "创建Webhook标签"
+    "createRequest": {
+        "message": "创建请求",
+        "description": "创建请求标签"
     },
     "requestLogs": {
         "message": "请求日志",
         "description": "请求日志标签"
     },
-    "noWebhooks": {
-        "message": "暂无webhook，请点击\"创建Webhook\"按钮添加",
-        "description": "没有webhook的提示"
+    "noRequests": {
+        "message": "暂无请求，请点击\"创建请求\"按钮添加",
+        "description": "没有请求的提示"
     },
     "name": {
         "message": "名称",
-        "description": "webhook名称字段"
+        "description": "请求名称字段"
     },
     "url": {
         "message": "URL",
-        "description": "webhook URL字段"
+        "description": "请求 URL字段"
     },
     "method": {
-        "message": "HTTP方法",
+        "message": "请求方法",
         "description": "HTTP方法字段"
     },
     "contentType": {
@@ -40,7 +40,7 @@
         "description": "内容类型字段"
     },
     "headers": {
-        "message": "请求头 (JSON格式)",
+        "message": "请求头",
         "description": "请求头字段"
     },
     "headersExample": {
@@ -71,6 +71,18 @@
         "message": "例如：{\"user_id\": \"{{user_id}}\"} 或 https://api.example.com/users/{{user_id}}",
         "description": "动态字段示例"
     },
+    "dynamicFieldsTitle": {
+        "message": "系统会自动检测以下格式的占位符：",
+        "description": "动态字段说明标题"
+    },
+    "dynamicFieldsDesc": {
+        "message": "这些占位符可以出现在 URL、请求头或请求体中。发送时会提示填写具体的值。",
+        "description": "动态字段功能说明"
+    },
+    "dynamicFieldsExampleTitle": {
+        "message": "示例：",
+        "description": "动态字段示例标题"
+    },
     "save": {
         "message": "保存",
         "description": "保存按钮"
@@ -96,11 +108,11 @@
         "description": "加载日志的提示"
     },
     "fillParameters": {
-        "message": "填写参数值",
+        "message": "填写参数",
         "description": "参数弹窗标题"
     },
     "paramDescription": {
-        "message": "此Webhook包含需要填写的参数，请为以下参数提供值：",
+        "message": "此请求包含需要填写的参数，请为以下参数提供值：",
         "description": "参数弹窗描述"
     },
     "send": {
@@ -115,20 +127,28 @@
         "message": "编辑",
         "description": "编辑按钮"
     },
+    "editRequest": {
+        "message": "编辑请求",
+        "description": "编辑请求标题"
+    },
     "delete": {
         "message": "删除",
         "description": "删除按钮"
     },
     "confirmDelete": {
-        "message": "确定要删除此webhook吗？",
+        "message": "确认删除",
         "description": "删除确认提示"
     },
-    "webhookDeleted": {
-        "message": "Webhook已删除",
-        "description": "Webhook删除成功提示"
+    "confirmDeleteMessage": {
+        "message": "确定要删除这个请求吗？",
+        "description": "删除确认提示"
+    },
+    "requestDeleted": {
+        "message": "请求已删除",
+        "description": "请求删除成功提示"
     },
     "confirmClearLogs": {
-        "message": "确定要清空所有请求日志吗？",
+        "message": "确认清空日志",
         "description": "清空日志确认提示"
     },
     "jsonError": {
@@ -146,6 +166,14 @@
     "sendSuccess": {
         "message": "发送成功",
         "description": "发送成功提示"
+    },
+    "sendingRequest": {
+        "message": "正在发送请求",
+        "description": "发送请求时的提示"
+    },
+    "requestSent": {
+        "message": "请求已发送",
+        "description": "请求发送完成的提示"
     },
     "sendFailed": {
         "message": "发送失败",
@@ -175,28 +203,237 @@
         "message": "状态",
         "description": "响应状态标签"
     },
-    "success": {
-        "message": "成功",
-        "description": "成功状态消息"
+    "enterValue": {
+        "message": "请输入{0}的值",
+        "description": "参数输入框占位符"
     },
-    "failure": {
-        "message": "失败",
-        "description": "失败状态消息"
+    "unknownMethod": {
+        "message": "未知方法",
+        "description": "未知HTTP方法标签"
     },
     "unknownError": {
         "message": "未知错误",
         "description": "未知错误消息"
     },
-    "enterValue": {
-        "message": "输入{0}的值",
-        "description": "参数输入框占位符"
+    "failure": {
+        "message": "失败",
+        "description": "失败状态消息"
     },
-    "unknownMethod": {
-        "message": "未知",
-        "description": "未知HTTP方法标签"
+    "success": {
+        "message": "成功",
+        "description": "成功状态消息"
     },
     "noDynamicFields": {
-        "message": "此webhook中未找到动态字段。",
-        "description": "未找到动态字段时显示的消息"
+        "message": "此请求中未发现动态字段。",
+        "description": "没有发现动态字段时显示的消息"
+    },
+    "requestUpdated": {
+        "message": "请求已更新",
+        "description": "请求更新成功提示"
+    },
+    "request": {
+        "message": "请求",
+        "description": "请求信息标题"
+    },
+    "response": {
+        "message": "响应",
+        "description": "响应信息标题"
+    },
+    "requestHeaders": {
+        "message": "请求头 (JSON格式):",
+        "description": "请求头格式说明"
+    },
+    "responseHeaders": {
+        "message": "响应头:",
+        "description": "响应头标题"
+    },
+    "networkError": {
+        "message": "网络错误",
+        "description": "网络错误状态描述"
+    },
+    "ok": {
+        "message": "成功",
+        "description": "200 状态码描述"
+    },
+    "created": {
+        "message": "已创建",
+        "description": "201 状态码描述"
+    },
+    "accepted": {
+        "message": "已接受",
+        "description": "202 状态码描述"
+    },
+    "noContent": {
+        "message": "无内容",
+        "description": "204 状态码描述"
+    },
+    "badRequest": {
+        "message": "请求错误",
+        "description": "400 状态码描述"
+    },
+    "unauthorized": {
+        "message": "未授权",
+        "description": "401 状态码描述"
+    },
+    "forbidden": {
+        "message": "禁止访问",
+        "description": "403 状态码描述"
+    },
+    "notFound": {
+        "message": "未找到",
+        "description": "404 状态码描述"
+    },
+    "methodNotAllowed": {
+        "message": "方法不允许",
+        "description": "405 状态码描述"
+    },
+    "requestTimeout": {
+        "message": "请求超时",
+        "description": "408 状态码描述"
+    },
+    "conflict": {
+        "message": "冲突",
+        "description": "409 状态码描述"
+    },
+    "unprocessableEntity": {
+        "message": "无法处理的实体",
+        "description": "422 状态码描述"
+    },
+    "tooManyRequests": {
+        "message": "请求过多",
+        "description": "429 状态码描述"
+    },
+    "internalServerError": {
+        "message": "服务器内部错误",
+        "description": "500 状态码描述"
+    },
+    "badGateway": {
+        "message": "网关错误",
+        "description": "502 状态码描述"
+    },
+    "serviceUnavailable": {
+        "message": "服务不可用",
+        "description": "503 状态码描述"
+    },
+    "gatewayTimeout": {
+        "message": "网关超时",
+        "description": "504 状态码描述"
+    },
+    "contextMenuTitle": {
+        "message": "发送到请求",
+        "description": "右键菜单根项文字"
+    },
+    "selectedText": {
+        "message": "选中的文本",
+        "description": "选中文本的标签"
+    },
+    "sendToRequest": {
+        "message": "发送到 {0}",
+        "description": "发送到特定请求的菜单项文字"
+    },
+    "extensionName": {
+        "message": "请求发送器",
+        "description": "扩展名称"
+    },
+    "extensionDescription": {
+        "message": "一个管理和发送HTTP请求的工具",
+        "description": "扩展描述"
+    },
+    "sendTo": {
+        "message": "发送到 $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        },
+        "description": "发送到"
+    },
+    "requests": {
+        "message": "请求",
+        "description": "请求"
+    },
+    "logs": {
+        "message": "日志",
+        "description": "日志"
+    },
+    "settings": {
+        "message": "设置",
+        "description": "设置"
+    },
+    "add": {
+        "message": "添加",
+        "description": "添加"
+    },
+    "yes": {
+        "message": "是",
+        "description": "是"
+    },
+    "no": {
+        "message": "否",
+        "description": "否"
+    },
+    "error": {
+        "message": "错误",
+        "description": "错误"
+    },
+    "warning": {
+        "message": "警告",
+        "description": "警告"
+    },
+    "info": {
+        "message": "信息",
+        "description": "信息"
+    },
+    "requestSentSuccess": {
+        "message": "请求发送成功",
+        "description": "请求发送成功"
+    },
+    "requestSentFailed": {
+        "message": "请求发送失败",
+        "description": "请求发送失败"
+    },
+    "requestSentError": {
+        "message": "发送请求时发生错误",
+        "description": "发送请求时发生错误"
+    },
+    "requestNotFound": {
+        "message": "未找到请求",
+        "description": "未找到请求"
+    },
+    "invalidUrl": {
+        "message": "无效的 URL",
+        "description": "无效的 URL"
+    },
+    "invalidHeaders": {
+        "message": "无效的请求头",
+        "description": "无效的请求头"
+    },
+    "invalidBody": {
+        "message": "无效的请求体",
+        "description": "无效的请求体"
+    },
+    "invalidContentType": {
+        "message": "无效的内容类型",
+        "description": "无效的内容类型"
+    },
+    "invalidMethod": {
+        "message": "无效的请求方法",
+        "description": "无效的请求方法"
+    },
+    "invalidName": {
+        "message": "无效的名称",
+        "description": "无效的名称"
+    },
+    "invalidRequest": {
+        "message": "无效的请求配置",
+        "description": "无效的请求配置"
+    },
+    "requestExists": {
+        "message": "已存在同名请求",
+        "description": "已存在同名请求"
+    },
+    "requestAdded": {
+        "message": "请求已添加",
+        "description": "请求已添加"
     }
 }

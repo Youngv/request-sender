@@ -1,35 +1,35 @@
 {
     "appName": {
-        "message": "Webhook Sender",
+        "message": "Request Sender",
         "description": "Name of the application"
     },
     "appDesc": {
-        "message": "A tool to manage and send webhooks",
+        "message": "A tool to manage and send HTTP requests",
         "description": "Description of the application"
     },
-    "myWebhooks": {
-        "message": "My Webhooks",
-        "description": "My Webhooks tab"
+    "myRequests": {
+        "message": "My Requests",
+        "description": "My Requests tab"
     },
-    "createWebhook": {
-        "message": "Create Webhook",
-        "description": "Create Webhook tab"
+    "createRequest": {
+        "message": "Create Request",
+        "description": "Create Request tab"
     },
     "requestLogs": {
         "message": "Request Logs",
         "description": "Request Logs tab"
     },
-    "noWebhooks": {
-        "message": "No webhooks yet. Click \"Create Webhook\" to add one.",
-        "description": "Message when no webhooks exist"
+    "noRequests": {
+        "message": "No requests yet. Click \"Create Request\" to add one.",
+        "description": "Message when no requests exist"
     },
     "name": {
         "message": "Name",
-        "description": "Webhook name field"
+        "description": "Request name field"
     },
     "url": {
         "message": "URL",
-        "description": "Webhook URL field"
+        "description": "Request URL field"
     },
     "method": {
         "message": "HTTP Method",
@@ -100,7 +100,7 @@
         "description": "Parameter modal title"
     },
     "paramDescription": {
-        "message": "This webhook contains parameters that need values. Please provide values for the following parameters:",
+        "message": "This request contains parameters that need values. Please provide values for the following parameters:",
         "description": "Parameter modal description"
     },
     "send": {
@@ -120,12 +120,12 @@
         "description": "Delete button"
     },
     "confirmDelete": {
-        "message": "Are you sure you want to delete this webhook?",
+        "message": "Are you sure you want to delete this request?",
         "description": "Delete confirmation message"
     },
-    "webhookDeleted": {
-        "message": "Webhook deleted",
-        "description": "Webhook deletion success message"
+    "requestDeleted": {
+        "message": "Request deleted",
+        "description": "Request deletion success message"
     },
     "confirmClearLogs": {
         "message": "Are you sure you want to clear all request logs?",
@@ -196,7 +196,167 @@
         "description": "Label for unknown HTTP method"
     },
     "noDynamicFields": {
-        "message": "No dynamic fields found in this webhook.",
+        "message": "No dynamic fields found in this request.",
         "description": "Message shown when no dynamic fields are found"
+    },
+    "dynamicFieldsTitle": {
+        "message": "The system will detect placeholders in the following format:",
+        "description": "Dynamic fields explanation title"
+    },
+    "dynamicFieldsDesc": {
+        "message": "These placeholders can appear in URL, headers, or request body. You will be prompted to fill in specific values when sending.",
+        "description": "Dynamic fields functionality description"
+    },
+    "dynamicFieldsExampleTitle": {
+        "message": "Example:",
+        "description": "Dynamic fields example title"
+    },
+    "editRequest": {
+        "message": "Edit Request",
+        "description": "Edit Request title"
+    },
+    "sendingRequest": {
+        "message": "Sending Request",
+        "description": "Message shown while sending request"
+    },
+    "requestSent": {
+        "message": "Request sent",
+        "description": "Message shown after request is sent"
+    },
+    "requestUpdated": {
+        "message": "Request updated",
+        "description": "Request update success message"
+    },
+    "request": {
+        "message": "Request",
+        "description": "Request information title"
+    },
+    "response": {
+        "message": "Response",
+        "description": "Response information title"
+    },
+    "requestHeaders": {
+        "message": "Request Headers (JSON format):",
+        "description": "Request headers format description"
+    },
+    "responseHeaders": {
+        "message": "Response Headers:",
+        "description": "Response headers title"
+    },
+    "networkError": {
+        "message": "Network Error",
+        "description": "Network error status description"
+    },
+    "ok": {
+        "message": "OK",
+        "description": "200 status code description"
+    },
+    "created": {
+        "message": "Created",
+        "description": "201 status code description"
+    },
+    "accepted": {
+        "message": "Accepted",
+        "description": "202 status code description"
+    },
+    "noContent": {
+        "message": "No Content",
+        "description": "204 status code description"
+    },
+    "badRequest": {
+        "message": "Bad Request",
+        "description": "400 status code description"
+    },
+    "unauthorized": {
+        "message": "Unauthorized",
+        "description": "401 status code description"
+    },
+    "forbidden": {
+        "message": "Forbidden",
+        "description": "403 status code description"
+    },
+    "notFound": {
+        "message": "Not Found",
+        "description": "404 status code description"
+    },
+    "methodNotAllowed": {
+        "message": "Method Not Allowed",
+        "description": "405 status code description"
+    },
+    "requestTimeout": {
+        "message": "Request Timeout",
+        "description": "408 status code description"
+    },
+    "conflict": {
+        "message": "Conflict",
+        "description": "409 status code description"
+    },
+    "unprocessableEntity": {
+        "message": "Unprocessable Entity",
+        "description": "422 status code description"
+    },
+    "tooManyRequests": {
+        "message": "Too Many Requests",
+        "description": "429 status code description"
+    },
+    "internalServerError": {
+        "message": "Internal Server Error",
+        "description": "500 status code description"
+    },
+    "badGateway": {
+        "message": "Bad Gateway",
+        "description": "502 status code description"
+    },
+    "serviceUnavailable": {
+        "message": "Service Unavailable",
+        "description": "503 status code description"
+    },
+    "gatewayTimeout": {
+        "message": "Gateway Timeout",
+        "description": "504 status code description"
+    },
+    "contextMenuTitle": {
+        "message": "Send to Request",
+        "description": "Context menu root item text"
+    },
+    "selectedText": {
+        "message": "Selected Text",
+        "description": "Label for selected text"
+    },
+    "sendToRequest": {
+        "message": "Send to {0}",
+        "description": "Context menu item text for specific request"
+    },
+    "requests": {
+        "message": "Requests",
+        "description": "Plural form of request"
+    },
+    "requestSentSuccess": {
+        "message": "Request Sent Successfully",
+        "description": "Title for notification when request is sent successfully"
+    },
+    "requestSentFailed": {
+        "message": "Request Failed",
+        "description": "Title for notification when request fails"
+    },
+    "requestSentError": {
+        "message": "Request Error",
+        "description": "Title for notification when there's an error sending the request"
+    },
+    "requestNotFound": {
+        "message": "Request not found",
+        "description": "Error message when a request is not found"
+    },
+    "invalidRequest": {
+        "message": "Invalid request configuration",
+        "description": "Error message for invalid request configuration"
+    },
+    "requestExists": {
+        "message": "A request with this name already exists",
+        "description": "Error message when trying to create a request with a name that already exists"
+    },
+    "requestAdded": {
+        "message": "Request added successfully",
+        "description": "Message shown after a new request is added"
     }
 }

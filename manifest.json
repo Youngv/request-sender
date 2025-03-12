@@ -1,30 +1,42 @@
 {
     "manifest_version": 3,
-    "name": "__MSG_appName__",
-    "version": "1.0",
-    "description": "__MSG_appDesc__",
-    "default_locale": "zh_CN",
+    "name": "Request Sender",
+    "version": "1.1.0",
+    "description": "A tool to manage and send HTTP(S) requests",
+    "default_locale": "en",
+    "author": "Victor Yang",
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "icons/icon16.png",
             "48": "icons/icon48.png",
             "128": "icons/icon128.png"
-        }
+        },
+        "default_title": "Request Sender"
     },
     "permissions": [
         "storage",
-        "activeTab"
+        "activeTab",
+        "contextMenus",
+        "notifications"
     ],
     "host_permissions": [
         "<all_urls>"
     ],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "background.js",
+        "type": "module"
     },
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
-    }
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["js/modules/*", "css/*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "minimum_chrome_version": "88"
 }
